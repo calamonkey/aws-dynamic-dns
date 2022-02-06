@@ -2,7 +2,6 @@
 import boto3
 import urllib
 import os
-import time
 
 # Set AWS access for Route 53 changes
 # acces key and secret key are passed with ENV variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
@@ -32,13 +31,13 @@ response = client.list_resource_record_sets(
 # Verify URLS match
 verify_url = response["ResourceRecordSets"][0]["Name"][:-1]
 if (verify_url != dynamic_url):
-    print("No Match")
+    exit(0)
     #exit routine due to not matching
 
 # Check IPs
 dns_ip = response["ResourceRecordSets"][0]["ResourceRecords"][0]["Value"]
 if (dns_ip == current_ip):
-    print("Currently the same, no action to perform")
+    exit(0)
     #exit routine due to no update needed
 
 # Update the IP in Route 53
