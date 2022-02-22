@@ -6,5 +6,5 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 RUN crontab crontab
 
-# Start backup service
+# Start service
 CMD [ "crond", "-f" ]
